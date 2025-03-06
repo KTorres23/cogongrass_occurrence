@@ -1,0 +1,63 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Holds banner and left sidebar using Flexbox */
+#container {
+  display: flex;
+  height: calc(100% - 100px); 
+  width: 100%;
+}
+
+/* Creates main banner */
+#banner {
+  height: 50px;
+  width: 100%;
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  text-align: center;
+  line-height: 50px; /* Center text vertically */
+  font-size: 20px;
+}
+
+/* Creates sub banner */
+#subBanner {
+  height: 50px;
+  width: 100%;
+  background-color: #bbdabb; /* Light green background */
+  color: rgb(0, 0, 0);
+  text-align: center;
+  line-height: 50px; /* Center text vertically */
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for the bullet points in the sub banner */
+#subBanner ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+#subBanner li {
+  display: inline;
+  margin-right: 20px;
+}
+
+/* Creates sidebar on left */
+#leftDiv {
+  width: 50%;
+  background-color: #eeeeee; /* Optional: Add a background color to the left div */
+  padding: 10px;
+}
+
+/* Creates map view on right */
+#viewDiv {
+  width: 50%;
+}
