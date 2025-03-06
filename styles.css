@@ -4,12 +4,15 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
+  overflow: auto; /* Allow scrolling */
+  font-family: Arial, sans-serif; /* Set a default font family */
 }
 
 /* Holds banner and left sidebar using Flexbox */
 #container {
   display: flex;
-  height: calc(100% - 100px); 
+  flex-wrap: nowrap; /* Prevent wrapping of flex items */
+  height: calc(100% - 100px); /* Adjust height to account for the taller banner */
   width: 100%;
 }
 
@@ -21,7 +24,9 @@ body {
   color: white;
   text-align: center;
   line-height: 50px; /* Center text vertically */
-  font-size: 20px;
+  font-size: 36px; /* Increase font size */
+  font-weight: bold; /* Make text bold */
+  font-family: 'Oswald', sans-serif; /* Use Oswald font */
 }
 
 /* Creates sub banner */
@@ -32,22 +37,35 @@ body {
   color: rgb(0, 0, 0);
   text-align: center;
   line-height: 50px; /* Center text vertically */
-  font-size: 15px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping of flex items */
 }
 
 /* Style for the bullet points in the sub banner */
 #subBanner ul {
-  list-style-type: disc;
-  padding-left: 20px;
+  list-style: none; /* Remove default list style */
+  padding-left: 0;
   margin: 0;
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping of list items */
+  justify-content: center; /* Center the list items */
 }
 
 #subBanner li {
-  display: inline;
+  display: inline-flex;
+  align-items: center;
   margin-right: 20px;
+  position: relative;
+}
+
+#subBanner li:not(:last-child)::after {
+  content: "•"; /* Add bullet symbol */
+  margin-left: 10px;
+  margin-right: 10px;
+  color: black; /* Set bullet color */
 }
 
 /* Creates sidebar on left */
@@ -55,9 +73,72 @@ body {
   width: 50%;
   background-color: #eeeeee; /* Optional: Add a background color to the left div */
   padding: 10px;
+  overflow-y: auto; /* Allow vertical scrolling if content overflows */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Creates map view on right */
 #viewDiv {
   width: 50%;
+  height: 100%; /* Ensure the map takes full height */
+}
+
+/* Style for headings */
+h2 {
+  font-size: 22px; 
+  font-weight: bold; 
+  color: #333; 
+}
+
+/* Style for paragraphs */
+p {
+  font-size: 16px;
+  line-height: 1.5; 
+  color: #666; 
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  #banner {
+    height: auto;
+    flex-direction: column; /* Stack items vertically */
+  }
+
+  #subBanner {
+    height: auto; /* Allow the height to adjust based on content */
+    padding: 10px 0; /* Add padding for better spacing */
+    flex-direction: column; /* Stack items vertically */
+  }
+
+  #subBanner ul {
+    padding-left: 0;
+  }
+
+  #subBanner li {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  #subBanner li:not(:last-child)::after {
+    content: "•"; /* Add bullet symbol */
+    margin-left: 10px;
+    margin-right: 10px;
+    color: black; /* Set bullet color */
+  }
+
+  #container {
+    flex-direction: column;
+    height: auto; /* Allow the height to adjust based on content */
+  }
+
+  #leftDiv,
+  #viewDiv {
+    width: 100%;
+  }
+
+  #viewDiv {
+    height: 50vh; /* Adjust height for smaller screens */
+  }
 }
