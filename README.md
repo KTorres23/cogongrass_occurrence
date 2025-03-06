@@ -1,8 +1,8 @@
 # Invasive Cogongrass Occurrence Web App
 
-Web App link, hosted in Github Pages:
+***Currently in development; last updated 3/5/2025***
 
-[ktorres23.github.io/cogongrass_occurrence/](https://ktorres23.github.io/cogongrass_occurrence/)
+Web App link, hosted in Github Pages: [ktorres23.github.io/cogongrass_occurrence/](https://ktorres23.github.io/cogongrass_occurrence/)
 
 ### Abstract
 
