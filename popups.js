@@ -1,11 +1,11 @@
 define([], () => {
     // ----------  SOCIAL INFORMATIONAL DATASETS ----------
-    const padusPopupTemplate = {
+    /*const padusPopupTemplate = {
         title: "Protected Area: {Loc_Nm}",
         content: "This is a protected area managed by {Loc_Mang}."
-    };
+    };*/
 
-    /*
+    
     // ----------  COGONGRASS DATASETS ----------
     const iNatPopupTemplate = {
         title: "Cogongrass Occurrence",
@@ -44,10 +44,10 @@ define([], () => {
         addPopups: (view) => {
             view.map.layers.forEach(layer => {
                 console.log(`Checking layer: ${layer.title}`);
-                if (layer.title === "PADUS") {
+                /*if (layer.title === "PADUS") {
                     layer.popupTemplate = padusPopupTemplate;
-                    console.log(`Applied PADUS popup template to layer: ${layer.title}`);
-                } else if (layer.title === "iNaturalist Cogongrass") {
+                    console.log(`Applied PADUS popup template to layer: ${layer.title}`);*/
+                if (layer.title === "iNaturalist Cogongrass") {
                     layer.popupTemplate = iNatPopupTemplate;
                     console.log(`Applied iNaturalist Cogongrass popup template to layer: ${layer.title}`);
                 } else if (layer.title === "EDDmapS Cogongrass") {
@@ -59,14 +59,6 @@ define([], () => {
                 }
             });
         }
-    };*/
-    return {
-        addPopups: (view) => {
-            view.map.layers.forEach(layer => {
-                if (layer.title === "PADUS") {
-                    layer.popupTemplate = padusPopupTemplate;
-                }
-            });
-        }
     };
+
 });
