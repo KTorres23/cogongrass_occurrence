@@ -82,6 +82,7 @@ require([
 
     // Load popups
     require(["./popups.js"], (popups) => {
+        console.log('Loading popups');
         popups.addPopups(view);
     });
 });
