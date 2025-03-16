@@ -5,9 +5,13 @@ define([], () => {
         content: "This is a protected area managed by {Loc_Mang}."
     };*/
 
+    const iNatPopupTemplate = {
+        title:"COGONGRASS",
+        content: "OCCURRED HERE."
+    };
     
     // ----------  COGONGRASS DATASETS ----------
-    const iNatPopupTemplate = {
+    /*const iNatPopupTemplate = {
         title: "Cogongrass Occurrence",
         content: "Reported by {user_name} on {fixed_date}",
         fieldInfos: [{
@@ -38,15 +42,16 @@ define([], () => {
                 dateFormat: "short-date"
             }
         }]
-    };
+    };*/
 
     return {
         addPopups: (view) => {
             view.map.layers.forEach(layer => {
                 console.log(`Checking layer: ${layer.title}`);
+                layer.popupTemplate = iNatPopupTemplate;
                 /*if (layer.title === "PADUS") {
                     layer.popupTemplate = padusPopupTemplate;
-                    console.log(`Applied PADUS popup template to layer: ${layer.title}`);*/
+                    console.log(`Applied PADUS popup template to layer: ${layer.title}`);
                 if (layer.title === "iNaturalist Cogongrass") {
                     layer.popupTemplate = iNatPopupTemplate;
                     console.log(`Applied iNaturalist Cogongrass popup template to layer: ${layer.title}`);
@@ -56,7 +61,7 @@ define([], () => {
                 } else if (layer.title === "survey123 Cogongrass") {
                     layer.popupTemplate = survey123CogongrassPopupTemplate;
                     console.log(`Applied survey123 Cogongrass popup template to layer: ${layer.title}`);
-                }
+                }*/
             });
         }
     };
