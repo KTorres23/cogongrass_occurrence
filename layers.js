@@ -5,40 +5,29 @@ define(["esri/layers/FeatureLayer"], (FeatureLayer) => {
         url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/Manager_Name_PADUS/FeatureServer"
     });
 
-    /*const wuiLayer = new FeatureLayer({
-        url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/WUI/FeatureServer"
+    const wuiLayer = new FeatureLayer({
+        url: "https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_WUI_5/ImageServer"
     });
 
-    // ---------- ADD COGONGRASS DATASETS ----------
 
+    
+    // ---------- ADD COGONGRASS DATASETS ----------
     const inatCogongrassLayer = new FeatureLayer({
-        url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/iNaturalist_Cogongrass/FeatureServer"
+        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/iNaturalist_Cogongrass_Observations/FeatureServer"
     });
 
     const eddmapsCogongrassLayer = new FeatureLayer({
-        url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/EDDMapS_Cogongrass/FeatureServer"
-    });*/
+        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/EDDmapS_Cogongrass_Observations/FeatureServer"
+    });
 
     // Create feature layer of Survey123 results
 
     return {
-        addLayers: (map) => {
-            console.log("Adding PADUS layer to the map");
-            map.add(padusLayer);
-            padusLayer.when(() => {
-                console.log("PADUS layer loaded successfully");
-            }, (error) => {
-                console.error("Error loading PADUS layer: ", error);
-            });
-        }
-    };
-
-    /*return {
         addLayers: (map) => {
             map.add(padusLayer);
             //map.add(wuiLayer);
             //map.add(inatCogongrassLayer);
             //map.add(eddmapsCogongrassLayer);
         }
-    };*/
+    };
 });
