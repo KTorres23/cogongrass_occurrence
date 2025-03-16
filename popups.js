@@ -38,7 +38,7 @@ define([], () => {
                 dateFormat: "short-date"
             }
         }]
-    };*/
+    };
 
     return {
         addPopups: (view) => {
@@ -56,6 +56,15 @@ define([], () => {
                 } else if (layer.title === "survey123 Cogongrass") {
                     layer.popupTemplate = survey123CogongrassPopupTemplate;
                     console.log(`Applied survey123 Cogongrass popup template to layer: ${layer.title}`);
+                }
+            });
+        }
+    };*/
+    return {
+        addPopups: (view) => {
+            view.map.layers.forEach(layer => {
+                if (layer.title === "PADUS") {
+                    layer.popupTemplate = padusPopupTemplate;
                 }
             });
         }
