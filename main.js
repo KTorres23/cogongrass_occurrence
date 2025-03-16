@@ -50,10 +50,7 @@ require([
         layers.addLayers(map);
     });
 
-    // Load popups
-    require(["./popups.js"], (popups) => {
-        popups.addPopups(view);
-    });
+    
 
     // Resizing functionality
     const resizer = document.getElementById('resizer');
@@ -82,4 +79,9 @@ require([
         document.removeEventListener('mousemove', resize);
         document.removeEventListener('mouseup', stopResize);
     }
+
+    // Load popups
+    require(["./popups.js"], (popups) => {
+        popups.addPopups(view);
+    });
 });
