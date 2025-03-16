@@ -1,5 +1,5 @@
 define([], () => {
-    
+    console.log('popups.js loaded');
     // ----------  SOCIAL INFORMATIONAL DATASETS ----------
     const padusPopupTemplate = {
         title: "Protected Area: {Loc_Nm}",

@@ -8,7 +8,7 @@ define(["esri/layers/FeatureLayer",
     const padusLayer = new FeatureLayer({
         url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/Manager_Name_PADUS/FeatureServer",
         title: "PADUS",
-        listMode: "hide"
+        legendEnabled: false
     });
 
     const wuiLayer = new ImageryTileLayer({
