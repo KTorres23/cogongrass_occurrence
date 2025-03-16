@@ -1,8 +1,8 @@
 define(["esri/layers/FeatureLayer", 
-    "esri/layers/ImageryLayer",
+    "esri/layers/ImageryTileLayer",
     "esri/renderers/SimpleRenderer",
     "esri/symbols/SimpleMarkerSymbol"],
-    (FeatureLayer, ImageryLayer, SimpleRenderer, SimpleMarkerSymbol) => {
+    (FeatureLayer, ImageryTileLayer, SimpleRenderer, SimpleMarkerSymbol) => {
     
     // ---------- ADD SOCIAL INFORMATIONAL DATASETS ----------
     const padusLayer = new FeatureLayer({
@@ -10,7 +10,7 @@ define(["esri/layers/FeatureLayer",
         title: "PADUS"
     });
 
-    const wuiLayer = new ImageryLayer({
+    const wuiLayer = new ImageryTileLayer({
         url: "https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_WUI_5/ImageServer",
         title: "WUI"
     });

@@ -24,6 +24,8 @@ define([], () => {
         content: "Reported by {reporter_name} on {date_time}."
     };
 
+
+    
     return {
         addPopups: (view) => {
             view.map.layers.forEach(layer => {
