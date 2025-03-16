@@ -92,9 +92,10 @@
     <!-- Slick Carousel JavaScript -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-    <!-- Initialize Slick Carousel -->
+    <!-- Initialize Slick Carousel and load main.js -->
     <script type="text/javascript">
       $(document).ready(function(){
+        // Initialize Slick Carousel
         $('.carousel').slick({
           dots: true,
           infinite: true,
@@ -102,11 +103,18 @@
           slidesToShow: 1,
           adaptiveHeight: true
         });
+
+        // Load and execute main.js
+        $.getScript('main.js')
+          .done(function() {
+            console.log('main.js loaded and executed');
+          })
+          .fail(function() {
+            console.error('Failed to load main.js');
+          });
       });
     </script>
 
-    <!-- Link to external JavaScript file -->
-    <script src="main.js"></script>
 
   </body>
 </html>
