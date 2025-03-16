@@ -1,5 +1,4 @@
 define([], () => {
-console.log('popups.js loaded');
     // ----------  SOCIAL INFORMATIONAL DATASETS ----------
     const padusPopupTemplate = {
         title: "Protected Area: {Loc_Nm}",
@@ -9,17 +8,38 @@ console.log('popups.js loaded');
     // ----------  COGONGRASS DATASETS ----------
     const iNatPopupTemplate = {
         title: "Cogongrass Occurrence",
-        content: "Reported by {user_name} on {observed_on:DateString}."
+        content: [{
+            type: "text",
+            text: "Reported by {user_name} on {observed_on}",
+            dateFormat: {
+                datePattern: "MM/dd/yyyy",
+                timeEnabled: false
+            }
+        }]
     };
     
     const eddmapsPopupTemplate = {
         title: "Cogongrass Occurrence",
-        content: "Reported by {reporter} on {ObsDate:DateString}."
+        content: [{
+            type: "text",
+            text: "Reported by {reporter} on {ObsDate}",
+            dateFormat: {
+                datePattern: "MM/dd/yyyy",
+                timeEnabled: false
+            }
+        }]
     };
 
     const survey123CogongrassPopupTemplate = {
         title: "Cogongrass Survey",
-        content: "Reported by {reporter_name} on {date_time:DateString}."
+        content: [{
+            type: "text",
+            text: "Reported by {reporter_name} on {date_time}",
+            dateFormat: {
+                datePattern: "MM/dd/yyyy",
+                timeEnabled: false
+            }
+        }]
     };
 
     return {
