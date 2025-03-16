@@ -25,9 +25,9 @@ define(["esri/layers/FeatureLayer"], (FeatureLayer) => {
     return {
         addLayers: (map) => {
             map.add(padusLayer);
-            //map.add(wuiLayer);
-            //map.add(inatCogongrassLayer);
-            //map.add(eddmapsCogongrassLayer);
+            map.add(wuiLayer);
+            map.add(inatCogongrassLayer);
+            map.add(eddmapsCogongrassLayer);
         }
     };
 });
