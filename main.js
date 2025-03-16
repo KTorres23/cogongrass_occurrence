@@ -31,11 +31,11 @@ require([
         view: view
     });
 
-        const legend = new Legend({
+    const legend = new Legend({
         view: view
     });
     
-        const layerList = new LayerList({
+    const layerList = new LayerList({
         view: view
     });
 
@@ -44,7 +44,6 @@ require([
     view.ui.add(legend, "bottom-right");
     view.ui.add(locateBtn, "top-left");
     view.ui.add(searchWidget, "top-left");
-
 
     // Load layers
     require(["./layers.js"], (layers) => {
@@ -56,8 +55,6 @@ require([
         popups.addPopups(view);
     });
 
-
-    
     // Resizing functionality
     const resizer = document.getElementById('resizer');
     const sidebar = document.getElementById('sidebar');

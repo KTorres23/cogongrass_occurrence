@@ -8,6 +8,21 @@ define([], () => {
     // ----------  COGONGRASS DATASETS ----------
     const iNatPopupTemplate = {
         title: "Cogongrass Occurrence",
+        content: "Reported by {user_name}"
+    };
+
+    const eddmapsPopupTemplate = {
+        title: "Cogongrass Occurrence",
+        content: "Reported by {reporter}"
+    };
+
+    const survey123CogongrassPopupTemplate = {
+        title: "Cogongrass Survey",
+        content: "Reported by {reporter_name}"
+    };
+
+    /*const iNatPopupTemplate = {
+        title: "Cogongrass Occurrence",
         content: "Reported by {user_name} on {observed_on}",
         fieldInfos: [{
             fieldName: "observed_on",
@@ -37,7 +52,7 @@ define([], () => {
                 dateFormat: "short-date"
             }
         }]
-    };
+    };*/
 
     return {
         addPopups: (view) => {
