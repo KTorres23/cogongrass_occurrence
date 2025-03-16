@@ -64,10 +64,10 @@ define(["esri/layers/FeatureLayer",
 
     return {
         addLayers: (map) => {
-            map.add(padusLayer);
             map.add(wuiLayer);
-            map.add(inatCogongrassLayer);
+            map.add(padusLayer);
             map.add(eddmapsCogongrassLayer);
+            map.add(inatCogongrassLayer);
             map.add(survey123CogongrassLayer);
         }
     };

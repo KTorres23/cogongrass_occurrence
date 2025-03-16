@@ -16,6 +16,10 @@
 
     <!-- Link to Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" />
+
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
   </head>
 
   <body>
@@ -38,7 +42,70 @@
     <!-- Link to external JavaScript file -->
     <script src="main.js"></script>
 
+    <div id="bot_banner"><strong> Quick Facts About Invasive Cogongrass </strong></div>
+    
+    <div id="bot_container">
+      <div id="bot_leftbar">
+        <h2>Quick Facts</h2>
+        <ul>
+          <li>Native to Southeast Asia</li>
+          <li>Introduced to the U.S. in the early 1900s</li>
+          <li>Found in 73 countries</li>
+          <li>Spreads by rhizomes and seeds</li>
+          <li>Can grow up to 6 feet tall</li>
+          <li>Forms dense stands that outcompete native vegetation</li>
+          <li>Difficult to control</li>
+        </ul>
+
+        <h2>Control Methods</h2>
+        <ul>
+          <li>Herbicides</li>
+          <li>Prescribed burning</li>
+          <li>Biological control</li>
+          <li>Manual removal</li>
+          <li>Prevention</li>
+        </ul>
+
+      </div>
+      
+      <div id="bot_rightbar">
+        <!-- Image Carousel -->
+        <div class="carousel">
+          <div><img src="image1.jpg" alt="Image 1"></div>
+          <div><img src="image2.jpg" alt="Image 2"></div>
+          <div><img src="image3.jpg" alt="Image 3"></div>
+        </div>
+
+        <!-- Carousel caption -->
+        <div class="carousel_caption">
+          <img src="swipe.png" alt="Swipe Icon" class="swipe_icon">
+          <p>Swipe left or right to see more images!</p>
+        </div>
+
+      </div>
+
+      
+
+    </div>
+
     <!-- Add Record button -->
     <a href="https://arcg.is/G08uW0"target="_blank" class="addRecordBtn">Report an observation</a>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Slick Carousel JavaScript -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.carousel').slick({
+          dots: true,
+          infinite: true,
+          speed: 300,
+          slidesToShow: 1,
+          adaptiveHeight: true
+        });
+      });
+    </script>
   </body>
 </html>
