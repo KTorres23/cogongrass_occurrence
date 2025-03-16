@@ -23,10 +23,22 @@ define(["esri/layers/FeatureLayer"], (FeatureLayer) => {
 
     return {
         addLayers: (map) => {
+            console.log("Adding PADUS layer to the map");
+            map.add(padusLayer);
+            padusLayer.when(() => {
+                console.log("PADUS layer loaded successfully");
+            }, (error) => {
+                console.error("Error loading PADUS layer: ", error);
+            });
+        }
+    };
+
+    /*return {
+        addLayers: (map) => {
             map.add(padusLayer);
             //map.add(wuiLayer);
             //map.add(inatCogongrassLayer);
             //map.add(eddmapsCogongrassLayer);
         }
-    };
+    };*/
 });
