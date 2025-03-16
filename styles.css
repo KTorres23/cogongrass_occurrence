@@ -101,17 +101,17 @@ body {
 
 /* ---------- Style for map widgets */
 .esri-legend {
-  font-size: 12px; /* Smaller font size */
-  padding: 5px; /* Smaller padding */
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-  border-radius: 4px; /* Rounded corners */
+  font-size: 10px; 
+  padding: 4px; 
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 4px;
 }
 
 .esri-layer-list {
-  font-size: 12px; /* Smaller font size */
-  padding: 5px; /* Smaller padding */
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-  border-radius: 4px; /* Rounded corners */
+  font-size: 10px;
+  padding: 4px; 
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 4px; 
 }
 
 
@@ -183,11 +183,15 @@ p {
   background-color: #4CAF50; /* Green background */
   color: white;
   text-align: left;
-  padding: 0 40px; /* Add padding to the banner */
+  padding: 0px; /* Add padding to the banner */
   line-height: 50px; /* Center text vertically */
   font-size: 36px; /* Increase font size */
   font-weight: bold; /* Make text bold */
   font-family: 'Oswald', sans-serif; /* Use Oswald font */
+}
+
+#bot_banner strong {
+  margin-left: 40px; /* Add margin to the left of the text */
 }
 
 #bot_container {
@@ -206,6 +210,14 @@ p {
   overflow-y: auto; 
   display: flex;
   flex-direction: column;
+}
+
+#bot_leftbar h2 {
+  margin-left: 40px; /* Add margin to the bottom of the heading */
+}
+
+#bot_leftbar p {
+  margin-left: 40px; /* Add margin to the bottom of the paragraph */
 }
 
 #bot_rightbar {
@@ -263,21 +275,22 @@ p {
 .addRecordBtn {
   position: absolute;
   z-index: 10;
-  bottom: 10px;
-  left: 10px;
+  bottom: 40px;
+  left: 40px;
   background-color: #af4c4c;
   color: white;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 24px;
   cursor: pointer;
   text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s;
 }
 .addRecordBtn:hover {
   background-color: #813737;
+  transform: scale(1.1); /* Grow to 110% of the original size on hover */
 }
-
 
 
 

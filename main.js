@@ -41,9 +41,10 @@ require([
 
     // Add map widgets
     view.ui.add(layerList, "top-right");
-view.ui.add(legend, "bottom-right");
-    view.ui.add(locateBtn, "top-left", 0);
-    view.ui.add(searchWidget, "top-left", 1);
+    view.ui.add(legend, "bottom-right");
+    view.ui.add(locateBtn, "top-left");
+    view.ui.add(searchWidget, "top-left");
+
 
     // Load layers
     require(["./layers.js"], (layers) => {
