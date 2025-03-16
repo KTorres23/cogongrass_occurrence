@@ -45,6 +45,12 @@ require([
         url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/Manager_Name_PADUS/FeatureServer"
     });
 
+    padusLayer.when(() => {
+        console.log("PADUS Layer loaded successfully");
+    }).catch((error) => {
+        console.error("Error loading PADUS Layer: ", error);
+    });
+
     map.add(padusLayer);
 
     // Load layers
