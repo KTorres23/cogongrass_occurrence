@@ -47,12 +47,12 @@ require([
     map.addLayer(padusLayer);
 
     // Load layers
-    require(["./layers"], (layers) => {
+    require(["./layers.js"], (layers) => {
         layers.addLayers(map);
     });
 
     // Load popups
-    require(["./popups"], (popups) => {
+    require(["./popups.js"], (popups) => {
         popups.addPopups(view);
     });
 });
