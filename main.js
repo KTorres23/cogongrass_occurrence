@@ -40,6 +40,12 @@ require([
         index: 1
     });
 
+    const padusLayer = new FeatureLayer({
+        url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/Manager_Name_PADUS/FeatureServer"
+    });
+
+    map.addLayer(padusLayer);
+
     // Load layers
     require(["./layers"], (layers) => {
         layers.addLayers(map);
