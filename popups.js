@@ -5,6 +5,7 @@ define([], () => {
         content: "This is a protected area managed by {Loc_Mang}."
     };
 
+    /*
     // ----------  COGONGRASS DATASETS ----------
     const iNatPopupTemplate = {
         title: "Cogongrass Occurrence",
@@ -37,7 +38,7 @@ define([], () => {
                 dateFormat: "short-date"
             }
         }]
-    };
+    };*/
 
     return {
         addPopups: (view) => {
