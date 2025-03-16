@@ -1,19 +1,19 @@
 define([], () => {
     // ----------  SOCIAL INFORMATIONAL DATASETS ----------
-    /*const padusPopupTemplate = {
+    const padusPopupTemplate = {
         title: "Protected Area: {Loc_Nm}",
         content: "This is a protected area managed by {Loc_Mang}."
-    };*/
+    };
     console.log(`in the popups.js file`);
 
-    const iNatPopupTemplate = {
+    /*const iNatPopupTemplate = {
         title:"COGONGRASS",
         content: "OCCURRED HERE."
     };
-    console.log(`made the inat template`);
+    console.log(`made the inat template`);*/
 
     // ----------  COGONGRASS DATASETS ----------
-    /*const iNatPopupTemplate = {
+    const iNatPopupTemplate = {
         title: "Cogongrass Occurrence",
         content: "Reported by {user_name} on {fixed_date}",
         fieldInfos: [{
@@ -44,7 +44,7 @@ define([], () => {
                 dateFormat: "short-date"
             }
         }]
-    };*/
+    };
 
     return {
         addPopups: (view) => {
@@ -52,11 +52,10 @@ define([], () => {
             view.when(() => {
                 view.map.layers.forEach(layer => {
                     console.log(`Checking layer: ${layer.title}`);
-                    layer.popupTemplate = iNatPopupTemplate;
-                    /*if (layer.title === "PADUS") {
+                    if (layer.title === "PADUS") {
                         layer.popupTemplate = padusPopupTemplate;
                         console.log(`Applied PADUS popup template to layer: ${layer.title}`);
-                    if (layer.title === "iNaturalist Cogongrass") {
+                    } else if (layer.title === "iNaturalist Cogongrass") {
                         layer.popupTemplate = iNatPopupTemplate;
                         console.log(`Applied iNaturalist Cogongrass popup template to layer: ${layer.title}`);
                     } else if (layer.title === "EDDmapS Cogongrass") {
@@ -65,7 +64,7 @@ define([], () => {
                     } else if (layer.title === "survey123 Cogongrass") {
                         layer.popupTemplate = survey123CogongrassPopupTemplate;
                         console.log(`Applied survey123 Cogongrass popup template to layer: ${layer.title}`);
-                    }*/
+                    }
                 });
             }).catch(err => {
                 console.error("Error loading layers: ", err);
