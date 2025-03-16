@@ -4,13 +4,6 @@ define([], () => {
         title: "Protected Area: {Loc_Nm}",
         content: "This is a protected area managed by {Loc_Mang}."
     };
-    console.log(`in the popups.js file`);
-
-    /*const iNatPopupTemplate = {
-        title:"COGONGRASS",
-        content: "OCCURRED HERE."
-    };
-    console.log(`made the inat template`);*/
 
     // ----------  COGONGRASS DATASETS ----------
     const iNatPopupTemplate = {
@@ -48,7 +41,6 @@ define([], () => {
 
     return {
         addPopups: (view) => {
-            console.log('addPopups function called');
             view.when(() => {
                 view.map.layers.forEach(layer => {
                     console.log(`Checking layer: ${layer.title}`);
