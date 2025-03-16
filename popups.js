@@ -8,36 +8,33 @@ define([], () => {
     // ----------  COGONGRASS DATASETS ----------
     const iNatPopupTemplate = {
         title: "Cogongrass Occurrence",
-        content: [{
-            type: "text",
-            text: "Reported by {user_name} on {observed_on}",
-            dateFormat: {
-                datePattern: "MM/dd/yyyy",
-                timeEnabled: false
+        content: "Reported by {user_name} on {observed_on}",
+        fieldInfos: [{
+            fieldName: "observed_on",
+            format: {
+                dateFormat: "short-date"
             }
         }]
     };
     
     const eddmapsPopupTemplate = {
         title: "Cogongrass Occurrence",
-        content: [{
-            type: "text",
-            text: "Reported by {reporter} on {ObsDate}",
-            dateFormat: {
-                datePattern: "MM/dd/yyyy",
-                timeEnabled: false
+        content: "Reported by {reporter} on {ObsDate}",
+        fieldInfos: [{
+            fieldName: "ObsDate",
+            format: {
+                dateFormat: "short-date"
             }
         }]
     };
 
     const survey123CogongrassPopupTemplate = {
         title: "Cogongrass Survey",
-        content: [{
-            type: "text",
-            text: "Reported by {reporter_name} on {date_time}",
-            dateFormat: {
-                datePattern: "MM/dd/yyyy",
-                timeEnabled: false
+        content: "Reported by {reporter_name} on {date_time}",
+        fieldInfos: [{
+            fieldName: "date_time",
+            format: {
+                dateFormat: "short-date"
             }
         }]
     };
