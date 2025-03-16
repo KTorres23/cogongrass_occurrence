@@ -1,6 +1,6 @@
 # Invasive Cogongrass Occurrence Web App
 
-***Currently in development; last updated 3/5/2025***
+***Currently in development; last updated 3/15/2025***
 
 Web App link, hosted in Github Pages: [ktorres23.github.io/cogongrass_occurrence/](https://ktorres23.github.io/cogongrass_occurrence/)
 
@@ -16,7 +16,7 @@ designed for early detection of invasive species. While the EDDMapS is a good to
 documenting cogongrass, it was not designed with user accessibility in mind and does not have
 functions for querying the database. The “Invasive Cogongrass Occurrence” web application will
 create an accessible interface for visualizing and documenting the invasion of cogongrass
-(Imperata cylindrica) across the U.S. The application will be based on pre-existing observations
+(*Imperata cylindrica*) across the U.S. The application will be based on pre-existing observations
 of cogongrass from iNaturalist and EDDMapS. Users will be able to add records and query and
 update the cogongrass database. Additionally, polygons of the Wildland-Urban Interface and
 U.S. protected areas will be included on the map, allowing users to better understand where
