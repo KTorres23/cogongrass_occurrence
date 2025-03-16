@@ -6,8 +6,10 @@ require([
     "esri/views/MapView",
     "esri/widgets/Locate",
     "esri/widgets/Search",
-    "esri/layers/FeatureLayer"
-], (esriConfig, Map, MapView, Locate, Search, FeatureLayer) => {
+    "esri/layers/FeatureLayer",
+    "esri/widgets/Legend",
+    "esri/widgets/LayerList"
+], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Legend, LayerList) => {
     esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurDKwg_xacEwEedlXdUDyJ7P-7Qbg6QwjB-VtI5cUmAZMi_mWKOS0Vo0J49DRO-0J1pP0__52Rw9RjcLIXbVib3NGIPqd05v5bJLJV72gKKaZ9YkXNs7vzI0H2rf2ZDaRG0YJIXAI9DX-3IngC9SL_rzfc3EVbzlgr9obb-jV-Uwz063O_Kvrm2St2D_Eay2k0CwVj5Jd4vRShs708LiyuLs.AT1_UdS3K7WT";
 
     const map = new Map({
@@ -29,29 +31,19 @@ require([
         view: view
     });
 
-    // Add locate widget to the top left corner of the view
-    view.ui.add(locateBtn, {
-        position: "top-left",
-        index: 0
+    const legend = new Legend({
+        view: view
     });
 
-    // Add search widget to the top right corner of the view
-    view.ui.add(searchWidget, {
-        position: "top-left",
-        index: 1
+    const layerList = new LayerList({
+        view: view
     });
-
-    const padusLayer = new FeatureLayer({
-        url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/Manager_Name_PADUS/FeatureServer"
-    });
-
-    padusLayer.when(() => {
-        console.log("PADUS Layer loaded successfully");
-    }).catch((error) => {
-        console.error("Error loading PADUS Layer: ", error);
-    });
-
-    map.add(padusLayer);
+    
+    // Add map widgets
+    view.ui.add(layerList, "top-right");
+    view.ui.add(legend, "bottom-right");
+    view.ui.add(locateBtn, "top-left", 0);
+    view.ui.add(searchWidget, "top-left", 1);
 
     // Load layers
     require(["./layers.js"], (layers) => {

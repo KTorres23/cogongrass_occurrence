@@ -15,6 +15,10 @@ define([], () => {
         content: "Reported by {REPORTER} on {DATE}."
     };
     
+    const survey123CogongrassPopupTemplate = {
+        title: "Cogongrass Survey",
+        content: "Reported by {report_name} on {date_time}."
+    };
 
     return {
         addPopups: (view) => {
