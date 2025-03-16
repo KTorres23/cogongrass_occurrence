@@ -47,7 +47,6 @@ define([], () => {
     };*/
 
     return {
-        console.log('return initiated');
         addPopups: (view) => {
             console.log('addPopups function called');
             view.map.layers.forEach(layer => {
