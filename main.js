@@ -44,7 +44,7 @@ require([
         url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/Manager_Name_PADUS/FeatureServer"
     });
 
-    map.addLayer(padusLayer);
+    map.add(padusLayer);
 
     // Load layers
     require(["./layers.js"], (layers) => {
