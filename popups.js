@@ -6,8 +6,6 @@ define([], () => {
         content: "This is a protected area managed by {Loc_Mang}."
     };
 
-
-
     // ----------  COGONGRASS DATASETS ----------
     const iNatPopupTemplate = {
         title: "Cogongrass Occurrence",
@@ -24,8 +22,6 @@ define([], () => {
         content: "Reported by {reporter_name} on {date_time}."
     };
 
-
-    
     return {
         addPopups: (view) => {
             view.map.layers.forEach(layer => {
@@ -33,9 +29,9 @@ define([], () => {
                     layer.popupTemplate = padusPopupTemplate;
                 } else if (layer.title === "iNaturalist Cogongrass") {
                     layer.popupTemplate = iNatPopupTemplate;
-                } else if (layer,title === "EDDmapS Cogongrass") {
+                } else if (layer.title === "EDDmapS Cogongrass") {
                     layer.popupTemplate = eddmapsPopupTemplate;
-                } else if (layer.title.includes("survey123")) {
+                } else if (layer.title === "survey123 Cogongrass") {
                     layer.popupTemplate = survey123CogongrassPopupTemplate;
                 }
             });

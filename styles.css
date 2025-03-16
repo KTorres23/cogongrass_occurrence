@@ -72,7 +72,7 @@ body {
 }
 
 /* Creates sidebar on left */
-#leftDiv {
+#sidebar {
   width: 50%;
   background-color: #eeeeee; /* Optional: Add a background color to the left div */
   padding: 10px;
@@ -156,10 +156,16 @@ p {
     height: auto; /* Allow the height to adjust based on content */
   }
 
-  #leftDiv,
+  #sidebar,
   #viewDiv {
     width: 100%;
   }
+
+  #resizer {
+    width: 10px;
+    cursor: ew-resize;
+    background-color: #ccc;
+}
 
   #viewDiv {
     height: 50vh; /* Adjust height for smaller screens */

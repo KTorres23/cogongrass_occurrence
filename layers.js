@@ -7,7 +7,8 @@ define(["esri/layers/FeatureLayer",
     // ---------- ADD SOCIAL INFORMATIONAL DATASETS ----------
     const padusLayer = new FeatureLayer({
         url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/Manager_Name_PADUS/FeatureServer",
-        title: "PADUS"
+        title: "PADUS",
+        listMode: "hide"
     });
 
     const wuiLayer = new ImageryTileLayer({
