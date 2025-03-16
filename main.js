@@ -5,8 +5,9 @@ require([
     "esri/Map",
     "esri/views/MapView",
     "esri/widgets/Locate",
-    "esri/widgets/Search"
-], (esriConfig, Map, MapView, Locate, Search) => {
+    "esri/widgets/Search",
+    "esri/layers/FeatureLayer"
+], (esriConfig, Map, MapView, Locate, Search, FeatureLayer) => {
     esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurDKwg_xacEwEedlXdUDyJ7P-7Qbg6QwjB-VtI5cUmAZMi_mWKOS0Vo0J49DRO-0J1pP0__52Rw9RjcLIXbVib3NGIPqd05v5bJLJV72gKKaZ9YkXNs7vzI0H2rf2ZDaRG0YJIXAI9DX-3IngC9SL_rzfc3EVbzlgr9obb-jV-Uwz063O_Kvrm2St2D_Eay2k0CwVj5Jd4vRShs708LiyuLs.AT1_UdS3K7WT";
 
     const map = new Map({
