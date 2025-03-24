@@ -48,7 +48,46 @@ require([
 
     // Load layers
     require(["./layers.js"], (layers) => {
-        layers.addLayers(map);
+
+        //layers.addLayers(map);
+
+        const [wuiLayer, padusLayer, eddmapsCogongrassLayer, inatCogongrassLayer, survey123CogongrassLayer] = layers.getLayers();
+        map.addMany([wuiLayer, padusLayer, eddmapsCogongrassLayer, inatCogongrassLayer, survey123CogongrassLayer]);
+
+        // Handle the search form submission
+        document.getElementById("searchForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const searchTerm = document.getElementById("searchInput").value;
+            searchLayers(searchTerm);
+            });
+        
+            function searchLayers(searchTerm) {
+            const query = new Query();
+            query.where = `user_name LIKE '%${searchTerm}%' OR reporter LIKE '%${searchTerm}%' OR reporter_name LIKE '%${searchTerm}%'`;
+            //query.where = `YourFieldName LIKE '%${searchTerm}%'`;
+            query.returnGeometry = true;
+            query.outFields = ["*"];
+        
+            const promises = [eddmapsCogongrassLayer, inatCogongrassLayer, survey123CogongrassLayer].map(layer => layer.queryFeatures(query));
+        
+            Promise.all(promises).then(results => {
+                const features = results.flatMap(result => result.features);
+                displayResults(features);
+            });
+            }
+        
+            function displayResults(features) {
+            const resultsDiv = document.getElementById("searchResults");
+            resultsDiv.innerHTML = "";
+            features.forEach(feature => {
+                const attributes = feature.attributes;
+                const resultItem = document.createElement("div");
+                resultItem.classList.add("result-item");
+                resultItem.textContent = JSON.stringify(attributes, null, 2);
+                resultsDiv.appendChild(resultItem);
+            });
+            }
+    
     });
 
     // Load popups
@@ -84,40 +123,5 @@ require([
         document.removeEventListener('mouseup', stopResize);
     }
 
-    // -------------- Add search function
-
-    // Handle the search form submission
-    document.getElementById("searchForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        const searchTerm = document.getElementById("searchInput").value;
-        searchLayers(searchTerm);
-        });
-    
-        function searchLayers(searchTerm) {
-        const query = new Query();
-        query.where = `user_name LIKE '%${searchTerm}%' OR reporter LIKE '%${searchTerm}%' OR reporter_name LIKE '%${searchTerm}%'`;
-        //query.where = `YourFieldName LIKE '%${searchTerm}%'`;
-        query.returnGeometry = true;
-        query.outFields = ["*"];
-    
-        const promises = [eddmapsCogongrassLayer, inatCogongrassLayer, survey123CogongrassLayer].map(layer => layer.queryFeatures(query));
-    
-        Promise.all(promises).then(results => {
-            const features = results.flatMap(result => result.features);
-            displayResults(features);
-        });
-        }
-    
-        function displayResults(features) {
-        const resultsDiv = document.getElementById("searchResults");
-        resultsDiv.innerHTML = "";
-        features.forEach(feature => {
-            const attributes = feature.attributes;
-            const resultItem = document.createElement("div");
-            resultItem.classList.add("result-item");
-            resultItem.textContent = JSON.stringify(attributes, null, 2);
-            resultsDiv.appendChild(resultItem);
-        });
-        }
 
 });
