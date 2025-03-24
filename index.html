@@ -32,8 +32,13 @@
     </div>
     <div id="container">
       <div id="sidebar">
-        <h2>Search Query Placeholder</h2>
-        <p>Placeholders...</p></div>
+        <h2>Search Query</h2>
+        <form id="searchForm">
+          <input type="text" id="searchInput" name="search" placeholder="Enter search term">
+          <button type="submit">Search</button>
+        </form>
+        <div id="searchResults"></div>
+      </div>
       <div id="resizer"></div>
       <div id="viewDiv"></div>
     </div>
@@ -61,7 +66,6 @@
           <li>Manual removal</li>
           <li>Prevention</li>
         </ul>
-
       </div>
       
       <div id="bot_rightbar">
