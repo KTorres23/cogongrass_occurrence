@@ -10,8 +10,10 @@ require([
     "esri/widgets/Legend",
     "esri/rest/support/Query",
     "esri/widgets/LayerList",
-    "esri/geometry/SpatialReference"
-], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Legend, Query, LayerList, SpatialReference) => {
+    "esri/geometry/SpatialReference",
+    "esri/widgets/Sketch",
+    "esri/layers/GraphicsLayer"
+], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Legend, Query, LayerList, SpatialReference, Sketch, GraphicsLayer) => {
     esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurDKwg_xacEwEedlXdUDyJ7P-7Qbg6QwjB-VtI5cUmAZMi_mWKOS0Vo0J49DRO-0J1pP0__52Rw9RjcLIXbVib3NGIPqd05v5bJLJV72gKKaZ9YkXNs7vzI0H2rf2ZDaRG0YJIXAI9DX-3IngC9SL_rzfc3EVbzlgr9obb-jV-Uwz063O_Kvrm2St2D_Eay2k0CwVj5Jd4vRShs708LiyuLs.AT1_UdS3K7WT";
 
     const map = new Map({
@@ -26,10 +28,6 @@ require([
     });
 
     const locateBtn = new Locate({
-        view: view
-    });
-
-    const searchWidget = new Search({
         view: view
     });
 
@@ -49,7 +47,22 @@ require([
     view.ui.add(layerList.container, "top-right");
     view.ui.add(legend.container, "bottom-right");
     view.ui.add(locateBtn, "top-left");
-    view.ui.add(searchWidget, "top-left");
+
+
+    // Graphics layer for sketching
+    const graphicsLayer = new GraphicsLayer(
+        {title: "Region of Interest"}
+    );
+    map.add(graphicsLayer);
+
+    // Sketch widget for selecting area of interest
+    const sketch = new Sketch({
+        view: view,
+        layer: graphicsLayer,
+        availableCreateTools: ["polygon", "rectangle"],
+        creationMode: "update"
+    });
+    view.ui.add(sketch, "top-right");
 
     // Load layers
     require(["./layers.js"], (layers) => {
@@ -159,6 +172,20 @@ require([
             map.addMany([wuiLayer, padusLayer, combinedLayer]);
         });
 
+        const searchWidget = new Search({
+            view: view,
+            includeDefaultSources: false,
+            sources: [{
+                layer: padusLayer,
+                searchFields: ["Loc_Nm", "Loc_Mang"],
+                displayField: "Loc_Nm",
+                exactMatch: false,
+                outFields: ["*"],
+                name: "Protected Areas of the US",
+                placeholder: "Search for US Protected Areas..."}]
+        });
+        view.ui.add(searchWidget, "top-left");
+
         // Handle the search form submission
         document.getElementById("searchForm").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -191,12 +218,8 @@ require([
 
                     // Create HTML content for the result item
                     const content = `
-                        <b>Object ID:</b> ${attributes.ObjectID}<br>
-                        <b>Reported by:</b> ${attributes.reporter}<br>
-                        <b>Date:</b> ${new Date(attributes.date).toLocaleDateString()}<br>
-                        <b>Infestation status:</b> ${attributes.infestation}<br>
-                        <b>Comment:</b> ${attributes.comment}<br>
-                        <b>Source:</b> ${attributes.source}<br>
+                        ID#${attributes.ObjectID} from  ${attributes.source}<br>
+                        Reported by ${attributes.reporter} on ${new Date(attributes.date).toLocaleDateString()}<br>
                     `;
 
                     resultItem.innerHTML = content;
@@ -216,6 +239,24 @@ require([
                 resultsDiv.style.display = "none"; // Hide the results div if no results
             }
         }
+
+        // Handle the sketch creation
+        sketch.on("create", (event) => {
+            if (event.state === "complete") {
+                const geometry = event.graphic.geometry;
+                const query = combinedLayer.createQuery();
+                query.geometry = geometry;
+                query.spatialRelationship = "intersects";
+                query.returnGeometry = true;
+                query.outFields = ["*"];
+
+                combinedLayer.queryFeatures(query).then(result => {
+                    displayResults(result.features);
+                }).catch(error => {
+                    console.error("Error querying layers:", error);
+                });
+            }
+        });
 
         // Load popups
         require(["./popups.js"], (popups) => {
