@@ -9,8 +9,9 @@ require([
     "esri/layers/FeatureLayer",
     "esri/widgets/Legend",
     "esri/rest/support/Query",
-    "esri/widgets/LayerList"
-], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Query, Legend, LayerList) => {
+    "esri/widgets/LayerList",
+    "esri/geometry/SpatialReference"
+], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Legend, Query, LayerList, SpatialReference) => {
     esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurDKwg_xacEwEedlXdUDyJ7P-7Qbg6QwjB-VtI5cUmAZMi_mWKOS0Vo0J49DRO-0J1pP0__52Rw9RjcLIXbVib3NGIPqd05v5bJLJV72gKKaZ9YkXNs7vzI0H2rf2ZDaRG0YJIXAI9DX-3IngC9SL_rzfc3EVbzlgr9obb-jV-Uwz063O_Kvrm2St2D_Eay2k0CwVj5Jd4vRShs708LiyuLs.AT1_UdS3K7WT";
 
     const map = new Map({
@@ -33,23 +34,130 @@ require([
     });
 
     const legend = new Legend({
-        view: view
+        view: view,
+        container: document.createElement("div")
     });
-    
+    legend.container.classList.add("custom-legend");
+
     const layerList = new LayerList({
-        view: view
+        view: view,
+        container: document.createElement("div")
     });
+    layerList.container.classList.add("custom-layerlist");
 
     // Add map widgets
-    view.ui.add(layerList, "top-right");
-    view.ui.add(legend, "bottom-right");
+    view.ui.add(layerList.container, "top-right");
+    view.ui.add(legend.container, "bottom-right");
     view.ui.add(locateBtn, "top-left");
     view.ui.add(searchWidget, "top-left");
 
     // Load layers
     require(["./layers.js"], (layers) => {
         const [wuiLayer, padusLayer, eddmapsCogongrassLayer, inatCogongrassLayer, survey123CogongrassLayer] = layers.getLayers();
-        map.addMany([wuiLayer, padusLayer, eddmapsCogongrassLayer, inatCogongrassLayer, survey123CogongrassLayer]);
+
+        // Define common fields for the combined layer
+        const combinedFields = [
+            { name: "ObjectID", alias: "ObjectID", type: "oid" },
+            { name: "source", alias: "Source", type: "string" },
+            { name: "reporter", alias: "Name of reporter", type: "string" },
+            { name: "date", alias: "Date of observation", type: "date" }, // Set type to "date"
+            { name: "url", alias: "Link to original dataset", type: "string" },
+            { name: "latitude", alias: "Latitude", type: "string" },
+            { name: "longitude", alias: "Longitude", type: "string" },
+            { name: "comment", alias: "Comment", type: "string" },
+            { name: "infestation", alias: "Infestation status", type: "string" },
+            { name: "image", alias: "Image URL", type: "string" }
+        ];
+
+        // Combine features from the three layers into one
+        const combinedLayer = new FeatureLayer({
+            title: "Cogongrass Observations",
+            source: [], // Empty source initially
+            fields: combinedFields,
+            objectIdField: "ObjectID",
+            geometryType: "point",
+            spatialReference: SpatialReference.WGS84, // Set spatial reference
+            renderer: {
+                type: "unique-value",
+                field: "source",
+                uniqueValueInfos: [
+                    {
+                        value: "EDDMapS",
+                        symbol: {
+                            type: "simple-marker",
+                            color: "red",
+                            size: "8px"
+                        },
+                        label: "EDDMapS"
+                    },
+                    {
+                        value: "iNaturalist",
+                        symbol: {
+                            type: "simple-marker",
+                            color: "blue",
+                            size: "8px"
+                        },
+                        label: "iNaturalist"
+                    },
+                    {
+                        value: "Survey123",
+                        symbol: {
+                            type: "simple-marker",
+                            color: "green",
+                            size: "8px"
+                        },
+                        label: "Survey123"
+                    }
+                ]
+            }
+        });
+
+        // Function to map attributes to common fields
+        function mapAttributes(attributes, source) {
+            return {
+                ObjectID: attributes.ObjectID || attributes.objectid,
+                source: source,
+                reporter: attributes.user_name || attributes.reporter || attributes.reporter_name,
+                date: attributes.fixed_date || attributes.ObsDate || attributes.date_time,
+                image: attributes.image_url,
+                url: attributes.url,
+                latitude: attributes.latitude || attributes.Latitude || attributes.please_enter_the_latitude_coord,
+                longitude: attributes.longitude || attributes.Longitude || attributes.field_13,
+                infestation: attributes.Status || attributes.infestation_status,
+                comment: attributes.comments || attributes.description
+            };
+        }
+
+        // Query features from each layer and add to the combined layer
+        const query = new Query();
+        query.where = "1=1";
+        query.returnGeometry = true;
+        query.outFields = ["*"];
+
+        const promises = [
+            eddmapsCogongrassLayer.queryFeatures(query).then(result => {
+                result.features.forEach(feature => {
+                    feature.attributes = mapAttributes(feature.attributes, "EDDMapS");
+                });
+                combinedLayer.applyEdits({ addFeatures: result.features });
+            }),
+            inatCogongrassLayer.queryFeatures(query).then(result => {
+                result.features.forEach(feature => {
+                    feature.attributes = mapAttributes(feature.attributes, "iNaturalist");
+                });
+                combinedLayer.applyEdits({ addFeatures: result.features });
+            }),
+            survey123CogongrassLayer.queryFeatures(query).then(result => {
+                result.features.forEach(feature => {
+                    feature.attributes = mapAttributes(feature.attributes, "Survey123");
+                });
+                combinedLayer.applyEdits({ addFeatures: result.features });
+            })
+        ];
+
+        Promise.all(promises).then(() => {
+            map.addMany([wuiLayer, padusLayer, combinedLayer]);
+        });
 
         // Handle the search form submission
         document.getElementById("searchForm").addEventListener("submit", function(event) {
@@ -60,15 +168,14 @@ require([
 
         function searchLayers(searchTerm) {
             const query = new Query();
-            query.where = `user_name LIKE '%${searchTerm}%' OR reporter LIKE '%${searchTerm}%' OR reporter_name LIKE '%${searchTerm}%'`;
+            query.where = `reporter LIKE '%${searchTerm}%' OR ObjectID LIKE '%${searchTerm}%' OR date LIKE '%${searchTerm}%' OR comment LIKE '%${searchTerm}%'`;
             query.returnGeometry = true;
             query.outFields = ["*"];
 
-            const promises = [eddmapsCogongrassLayer, inatCogongrassLayer, survey123CogongrassLayer].map(layer => layer.queryFeatures(query));
-
-            Promise.all(promises).then(results => {
-                const features = results.flatMap(result => result.features);
-                displayResults(features);
+            combinedLayer.queryFeatures(query).then(result => {
+                displayResults(result.features);
+            }).catch(error => {
+                console.error("Error querying layers:", error);
             });
         }
 
@@ -80,15 +187,31 @@ require([
                 const resultItem = document.createElement("div");
                 resultItem.classList.add("result-item");
                 resultItem.textContent = JSON.stringify(attributes, null, 2);
-                resultsDiv.appendChild(resultItem);
+                if (resultItem instanceof Node) { // Ensure resultItem is a valid Node
+                    resultsDiv.appendChild(resultItem);
+                }
             });
         }
+
+        // Load popups
+        require(["./popups.js"], (popups) => {
+            popups.addPopups(view, combinedLayer); // Pass the combined layer to addPopups
+        });
+
+        // Popup for PadUS
+        const padusPopupTemplate = {
+            title: "Protected Area: {Loc_Nm}",
+                        content: "This is a protected area managed by {Loc_Mang}."
+                            };
+        padusLayer.popupTemplate = padusPopupTemplate;
+
     });
 
-    // Load popups
-    require(["./popups.js"], (popups) => {
-        popups.addPopups(view);
-    });
+    // Add map widgets
+    view.ui.add(layerList.container, "top-right");
+    view.ui.add(legend.container, "bottom-right");
+    view.ui.add(locateBtn, "top-left");
+    view.ui.add(searchWidget, "top-left");
 
     // Resizing functionality
     const resizer = document.getElementById('resizer');

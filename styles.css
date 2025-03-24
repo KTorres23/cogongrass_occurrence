@@ -114,6 +114,17 @@ body {
   border-radius: 4px; 
 }
 
+.custom-legend {
+    width: 100px; /* Adjust the width as needed */
+    height: 200px;
+    overflow: auto;
+}
+
+.custom-layerlist {
+    width: 100px; /* Adjust the width as needed */
+    height: auto;
+    overflow: auto;
+}
 
 /* Style for headings */
 h2 {

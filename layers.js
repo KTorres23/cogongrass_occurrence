@@ -7,13 +7,13 @@ define(["esri/layers/FeatureLayer",
     // ---------- ADD SOCIAL INFORMATIONAL DATASETS ----------
     const padusLayer = new FeatureLayer({
         url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/Manager_Name_PADUS/FeatureServer",
-        title: "PADUS",
+        title: "Protected Areas of the US",
         legendEnabled: false
     });
 
     const wuiLayer = new ImageryTileLayer({
         url: "https://tiledimageservices.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Global_WUI_5/ImageServer",
-        title: "WUI"
+        title: "Wildland-Urban Interface",
     });
 
     // ---------- ADD COGONGRASS DATASETS ----------
