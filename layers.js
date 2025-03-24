@@ -63,8 +63,12 @@ define(["esri/layers/FeatureLayer",
     });
 
     function getLayers(){
-        return [wuiLayer, padusLayer, eddmapsCogongrassLayer, inatCogongrassLayer, survey123Cogongrass];
+        return [wuiLayer, padusLayer, eddmapsCogongrassLayer, inatCogongrassLayer, survey123CogongrassLayer];
     }
+
+    return{
+        getLayers: getLayers
+    };
 
     /*return {
         addLayers: (map) => {
