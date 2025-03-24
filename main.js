@@ -182,15 +182,39 @@ require([
         function displayResults(features) {
             const resultsDiv = document.getElementById("searchResults");
             resultsDiv.innerHTML = "";
-            features.forEach(feature => {
-                const attributes = feature.attributes;
-                const resultItem = document.createElement("div");
-                resultItem.classList.add("result-item");
-                resultItem.textContent = JSON.stringify(attributes, null, 2);
-                if (resultItem instanceof Node) { // Ensure resultItem is a valid Node
+            if (features.length > 0) {
+                resultsDiv.style.display = "block"; // Show the results div
+                features.forEach(feature => {
+                    const attributes = feature.attributes;
+                    const resultItem = document.createElement("div");
+                    resultItem.classList.add("result-item");
+
+                    // Create HTML content for the result item
+                    const content = `
+                        <b>Object ID:</b> ${attributes.ObjectID}<br>
+                        <b>Reported by:</b> ${attributes.reporter}<br>
+                        <b>Date:</b> ${new Date(attributes.date).toLocaleDateString()}<br>
+                        <b>Infestation status:</b> ${attributes.infestation}<br>
+                        <b>Comment:</b> ${attributes.comment}<br>
+                        <b>Source:</b> ${attributes.source}<br>
+                    `;
+
+                    resultItem.innerHTML = content;
+                    resultItem.addEventListener("click", () => {
+                        view.goTo({
+                            target: feature.geometry,
+                            zoom: 15
+                        });
+                        view.popup.open({
+                            features: [feature],
+                            location: feature.geometry
+                        });
+                    });
                     resultsDiv.appendChild(resultItem);
-                }
-            });
+                });
+            } else {
+                resultsDiv.style.display = "none"; // Hide the results div if no results
+            }
         }
 
         // Load popups
@@ -201,8 +225,8 @@ require([
         // Popup for PadUS
         const padusPopupTemplate = {
             title: "Protected Area: {Loc_Nm}",
-                        content: "This is a protected area managed by {Loc_Mang}."
-                            };
+            content: "This is a protected area managed by {Loc_Mang}."
+        };
         padusLayer.popupTemplate = padusPopupTemplate;
 
     });

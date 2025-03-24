@@ -61,6 +61,7 @@ define([], () => {
             const popupTemplate = {
                 title: "Cogongrass Observation by {reporter}",
                 content: `
+                <b>Object ID:</b> {objectid}<br>
                 <b>Reported by:</b> {reporter}<br>
                 <b>Date:</b> {date}<br>
                 <b>Latitude:</b> {latitude}<br>
