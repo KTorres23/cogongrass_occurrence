@@ -19,7 +19,17 @@
     <!-- Slick Carousel CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
   </head>
+
+<style>
+  #chartContainer {
+    display: none;
+  }
+
+</style>
 
   <body>
     <div id="banner"><strong>Invasive Cogongrass Occurrence</strong></div>
@@ -36,9 +46,14 @@
         <form id="searchForm">
           <input type="text" id="searchInput" name="search" placeholder="Search for cogongrasses...">
           <button type="submit">Search</button>
-
         </form>
+        <div id="chartContainer">
+            <p style="text-align: center;">Number of observations by source and by year</p>
+          <div id="chartSourceDiv" class="chart"></div> <!-- Div to display Plotly chart -->
+          <div id="chartYearsDiv" class="chart"></div> <!-- Div to display Plotly chart -->
+        </div>
         <div id="searchResults"></div>
+        
       </div>
       <div id="resizer"></div>
       <div id="viewDiv"></div>
@@ -89,6 +104,16 @@
 
     <!-- Add Record button -->
     <a href="https://arcg.is/0n1Pau" target="_blank" class="addRecordBtn"><strong>Report an observation</strong></a>
+
+    <!-- New bottom bar container for sources and references -->
+    <div id="bottomBar">
+      <h2>Sources and References</h2>
+      <ul>
+        <li><a href="https://example.com/source1" target="_blank">Source 1</a></li>
+        <li><a href="https://example.com/source2" target="_blank">Source 2</a></li>
+        <li><a href="https://example.com/source3" target="_blank">Source 3</a></li>
+      </ul>
+    </div>
 
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

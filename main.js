@@ -48,11 +48,8 @@ require([
     view.ui.add(legend.container, "bottom-right");
     view.ui.add(locateBtn, "top-left");
 
-
     // Graphics layer for sketching
-    const graphicsLayer = new GraphicsLayer(
-        {title: "Region of Interest"}
-    );
+    const graphicsLayer = new GraphicsLayer({ title: "Region of Interest" });
     map.add(graphicsLayer);
 
     // Sketch widget for selecting area of interest
@@ -63,6 +60,14 @@ require([
         creationMode: "update"
     });
     view.ui.add(sketch, "top-right");
+
+    // Define the search widget before adding it to the view
+    const searchWidget = new Search({
+        view: view,
+        includeDefaultSources: false,
+        sources: []
+    });
+    view.ui.add(searchWidget, "top-left");
 
     // Load layers
     require(["./layers.js"], (layers) => {
@@ -170,21 +175,18 @@ require([
 
         Promise.all(promises).then(() => {
             map.addMany([wuiLayer, padusLayer, combinedLayer]);
-        });
 
-        const searchWidget = new Search({
-            view: view,
-            includeDefaultSources: false,
-            sources: [{
+            // Add the search source after layers are loaded
+            searchWidget.sources.push({
                 layer: padusLayer,
                 searchFields: ["Loc_Nm", "Loc_Mang"],
                 displayField: "Loc_Nm",
                 exactMatch: false,
                 outFields: ["*"],
                 name: "Protected Areas of the US",
-                placeholder: "Search for US Protected Areas..."}]
+                placeholder: "Search for US Protected Areas..."
+            });
         });
-        view.ui.add(searchWidget, "top-left");
 
         // Handle the search form submission
         document.getElementById("searchForm").addEventListener("submit", function(event) {
@@ -240,6 +242,66 @@ require([
             }
         }
 
+        // Function to summarize data and create Plotly chart
+        function summarizeData(features) {
+            const chartContainer = document.getElementById('chartContainer');
+            if (features.length === 0) {
+                chartContainer.style.display = 'none';
+                return;
+            }
+
+            chartContainer.style.display = 'block';
+
+            // Summarize data by source
+            const sources = features.map(feature => feature.attributes.source);
+            const sourceCounts = sources.reduce((acc, source) => {
+                acc[source] = (acc[source] || 0) + 1;
+                return acc;
+            }, {});
+
+            const source_data = [{
+                labels: Object.keys(sourceCounts),
+                values: Object.values(sourceCounts),
+                type: 'pie'
+            }];
+
+            const source_layout = {
+                title: 'Observations by Source',
+                xaxis: { title: 'Source' },
+                yaxis: { title: 'Count' },
+                margin: { t: 30, l: 30, r: 30, b: 30 },
+                height: 200,
+                width: 200,
+                showlegend: false
+            };
+
+            Plotly.newPlot('chartSourceDiv', source_data, source_layout);
+
+            // Summarize data by year
+            const years = features.map(feature => new Date(feature.attributes.date).getFullYear());
+            const yearCounts = years.reduce((acc, year) => {
+                acc[year] = (acc[year] || 0) + 1;
+                return acc;
+            }, {});
+
+            const year_data = [{
+                x: Object.keys(yearCounts),
+                y: Object.values(yearCounts),
+                type: 'bar'
+            }];
+
+            const year_layout = {
+                title: 'Observations by Year',
+                xaxis: { title: 'Year' },
+                yaxis: { title: 'Count' },
+                margin: { t: 30, l: 30, r: 30, b: 30 },
+                height: 200,
+                width: 200
+            };
+
+            Plotly.newPlot('chartYearsDiv', year_data, year_layout);
+        }
+
         // Handle the sketch creation
         sketch.on("create", (event) => {
             if (event.state === "complete") {
@@ -252,6 +314,7 @@ require([
 
                 combinedLayer.queryFeatures(query).then(result => {
                     displayResults(result.features);
+                    summarizeData(result.features);
                 }).catch(error => {
                     console.error("Error querying layers:", error);
                 });
@@ -295,7 +358,7 @@ require([
         if (isResizing) {
             const newWidth = e.clientX;
             sidebar.style.width = `${newWidth}px`;
-            viewDiv.style.width = `calc(100% - ${newWidth + 10}px)`;
+            viewDiv.style.width = `calc(100% - ${newWidth}px)`;
             view.resize();
         }
     }
@@ -305,4 +368,9 @@ require([
         document.removeEventListener('mousemove', resize);
         document.removeEventListener('mouseup', stopResize);
     }
+
+    // Ensure the map resizes when the window is resized
+    window.addEventListener('resize', () => {
+        view.resize();
+    });
 });

@@ -4,8 +4,8 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
-  overflow: auto; /* Allow scrolling */
-  font-family: Arial, sans-serif; /* Set a default font family */
+  overflow: auto; 
+  font-family: Arial, sans-serif; 
 }
 
 
@@ -14,48 +14,48 @@ body {
 /* Holds banner and left sidebar using Flexbox */
 #container {
   display: flex;
-  flex-wrap: nowrap; /* Prevent wrapping of flex items */
-  height: calc(100% - 100px); /* Adjust height to account for the taller banner */
+  flex-wrap: nowrap;
+  height: calc(100% - 100px);
   width: 100%;
-  overflow: auto; /* Allow scrolling */
+  overflow: auto; 
 }
 
 /* Creates main banner */
 #banner {
   height: 50px;
   width: 100%;
-  background-color: #4CAF50; /* Green background */
+  background-color: #4CAF50; 
   color: white;
   text-align: center;
-  line-height: 50px; /* Center text vertically */
-  font-size: 36px; /* Increase font size */
-  font-weight: bold; /* Make text bold */
-  font-family: 'Oswald', sans-serif; /* Use Oswald font */
+  line-height: 50px; 
+  font-size: 36px; 
+  font-weight: bold;
+  font-family: 'Oswald', sans-serif;
 }
 
 /* Creates sub banner */
 #subBanner {
   height: 50px;
   width: 100%;
-  background-color: #bbdabb; /* Light green background */
+  background-color: #bbdabb; 
   color: rgb(0, 0, 0);
   text-align: center;
-  line-height: 50px; /* Center text vertically */
+  line-height: 50px; 
   font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap; /* Allow wrapping of flex items */
+  flex-wrap: wrap;
 }
 
 /* Style for the bullet points in the sub banner */
 #subBanner ul {
-  list-style: none; /* Remove default list style */
+  list-style: none; 
   padding-left: 0;
   margin: 0;
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping of list items */
-  justify-content: center; /* Center the list items */
+  flex-wrap: wrap; 
+  justify-content: center; 
 }
 
 #subBanner li {
@@ -66,10 +66,10 @@ body {
 }
 
 #subBanner li:not(:last-child)::after {
-  content: "•"; /* Add bullet symbol */
+  content: "•"; 
   margin-left: 10px;
   margin-right: 10px;
-  color: black; /* Set bullet color */
+  color: black; 
 }
 
 
@@ -78,16 +78,19 @@ body {
 /* Creates sidebar on left */
 #sidebar {
   width: 33.33%;
-  background-color: #eeeeee; /* Optional: Add a background color to the left div */
+  background-color: #eeeeee;
   padding: 10px;
-  overflow-y: auto; /* Allow vertical scrolling if content overflows */
+  overflow-y: auto; 
   display: flex;
+  float:left;
   flex-direction: column;
 }
 
 /* Create middle bar to adjust map and list width */
 #resizer {
-  width: 5px;
+  width: 10px;
+  height: 100%;
+  float:left;
   cursor: ew-resize;
   background-color: #ccc;
 }
@@ -95,215 +98,12 @@ body {
 /* Creates map view on right */
 #viewDiv {
   width: 66.67%;
-  height: 100%; /* Ensure the map takes full height */
-  overflow: auto; /* Allow scrolling */
+  height: 100%;
+  float: right;
+  overflow: auto; 
 }
 
-/* ---------- Style for map widgets */
-.esri-legend {
-  font-size: 10px; 
-  padding: 4px; 
-  background-color: rgba(255, 255, 255, 0.8); 
-  border-radius: 4px;
-}
-
-.esri-layer-list {
-  font-size: 10px;
-  padding: 4px; 
-  background-color: rgba(255, 255, 255, 0.8); 
-  border-radius: 4px; 
-}
-
-.custom-legend {
-    width: 100px; /* Adjust the width as needed */
-    height: 200px;
-    overflow: auto;
-}
-
-.custom-layerlist {
-    width: 100px; /* Adjust the width as needed */
-    height: auto;
-    overflow: auto;
-}
-
-/* Style for headings */
-h2 {
-  font-size: 22px; 
-  font-weight: bold; 
-  color: #333; 
-}
-
-/* Style for paragraphs */
-p {
-  font-size: 16px;
-  line-height: 1.5; 
-  color: #666; 
-}
-
-
-/* --------------- Media query for smaller screens  --------------- */
-@media (max-width: 600px) {
-  #banner {
-    height: auto;
-    flex-direction: column; /* Stack items vertically */
-  }
-
-  #subBanner {
-    height: auto; /* Allow the height to adjust based on content */
-    padding: 10px 0; /* Add padding for better spacing */
-    flex-direction: column; /* Stack items vertically */
-  }
-
-  #subBanner ul {
-    padding-left: 0;
-  }
-
-  #subBanner li {
-    display: block;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-
-  #subBanner li:not(:last-child)::after {
-    content: "•"; /* Add bullet symbol */
-    margin-left: 10px;
-    margin-right: 10px;
-    color: black; /* Set bullet color */
-  }
-
-  #container {
-    flex-direction: column;
-    height: auto; /* Allow the height to adjust based on content */
-  }
-
-  #sidebar,
-  #viewDiv {
-    width: 100%;
-    height: 50vh;
-  }
-
-}
-
-
-
-/* --------------- SET UP BOTTOM CONTAINER INFORMATION  --------------- */
-
-#bot_banner {
-  height: 50px;
-  width: 100%;
-  background-color: #4CAF50; /* Green background */
-  color: white;
-  text-align: left;
-  padding: 0px; /* Add padding to the banner */
-  line-height: 50px; /* Center text vertically */
-  font-size: 36px; /* Increase font size */
-  font-weight: bold; /* Make text bold */
-  font-family: 'Oswald', sans-serif; /* Use Oswald font */
-}
-
-#bot_banner strong {
-  margin-left: 40px; /* Add margin to the left of the text */
-}
-
-#bot_container {
-  display: flex;
-  flex-wrap: nowrap; /* Prevent wrapping of flex items */
-  height: calc(100% - 100px); /* Adjust height to account for the taller banner */
-  width: 100%;
-  max-height: 600px;
-   /* Allow scrolling */
-}
-
-#bot_leftbar {
-  width: 40%;
-  background-color: #eeeeee; 
-  padding: 10px;
-  overflow-y: auto; 
-  display: flex;
-  flex-direction: column;
-}
-
-#bot_leftbar h2 {
-  margin-left: 40px; /* Add margin to the bottom of the heading */
-}
-
-#bot_leftbar p {
-  margin-left: 40px; /* Add margin to the bottom of the paragraph */
-}
-
-#bot_rightbar {
-  width: 60%;
-  background-color: #eeeeee; 
-  padding: 10px;
-  overflow-y: auto; 
-  display: flex;
-  flex-direction: column;
-}
-
-/* ------- Add styles for the image carousel */
-.carousel {
-  width: 100%;
-  max-width: 600px;
-  max-height: 400px;
-  margin: 20px auto;
-}
-
-.carousel img {
-  width: 600px;
-  height: auto;
-  max-width: 600px; /* Set a maximum width for the images */
-  max-height: 400px; /* Set a maximum height for the images */
-  object-fit: cover;
-  object-position: center; 
-  display: block;
-  margin: 0 auto;
-}
-
-.carousel_caption {
-  text-align: center;
-  margin-top: 10px;
-  display: block;
-}
-
-.carousel_caption .swipe_icon {
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-  margin-right: 8px;
-}
-
-.carousel_caption p {
-  display: inline;
-  font-size: 16px;
-  color: #666;
-}
-
-
-
-/* --------------- MISC.  --------------- */
-
-/* Add record button to map */
-.addRecordBtn {
-  position: absolute;
-  z-index: 10;
-  bottom: 40px;
-  left: 40px;
-  background-color: #af4c4c;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  font-size: 24px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color 0.3s, transform 0.3s;
-}
-.addRecordBtn:hover {
-  background-color: #813737;
-  transform: scale(1.1); /* Grow to 110% of the original size on hover */
-}
-
-/* Style for the search form */
+/* ---------- Style for the search form */
 #searchForm {
   display: flex;
   flex-direction: column;
@@ -334,7 +134,7 @@ p {
 
 /* Style for search results */
 #searchResults {
-  display: none; /* Hide the search results initially */
+  display: none; 
   margin-top: 20px;
 }
 
@@ -345,6 +145,275 @@ p {
   margin-bottom: 10px;
   background-color: #f9f9f9;
 }
+
+/* Add styles for the chart container and chart divs */
+#chartContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.chart {
+  width: 48%;
+  height: 200px;
+  display: inline-block;
+}
+
+
+/* ---------- Style for map widgets */
+.esri-legend {
+  font-size: 10px; 
+  padding: 4px; 
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 4px;
+}
+
+.esri-layer-list {
+  font-size: 10px;
+  padding: 4px; 
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 4px; 
+}
+
+.custom-legend {
+    width: 100px;
+    height: 200px;
+    overflow: auto;
+}
+
+.custom-layerlist {
+    width: 100px; 
+    height: auto;
+    overflow: auto;
+}
+
+/* Style for headings */
+h2 {
+  font-size: 22px; 
+  font-weight: bold; 
+  color: #333; 
+  line-height: 0.5;
+  padding: 0px 0;
+}
+
+/* Style for paragraphs */
+p {
+  font-size: 16px;
+  line-height: 1.5; 
+  color: #666; 
+}
+
+
+/* --------------- Media query for smaller screens  --------------- */
+@media (max-width: 600px) {
+  #banner {
+    height: auto;
+    flex-direction: column;
+  }
+
+  #subBanner {
+    height: auto; 
+    padding: 10px 0;
+    flex-direction: column; 
+  }
+
+  #subBanner ul {
+    padding-left: 0;
+  }
+
+  #subBanner li {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  #subBanner li:not(:last-child)::after {
+    content: "•"; 
+    margin-left: 10px;
+    margin-right: 10px;
+    color: black; 
+  }
+
+  #container {
+    flex-direction: column;
+    height: auto; 
+  }
+
+  #sidebar,
+  #viewDiv {
+    width: 100%;
+    height: 50vh;
+  }
+
+}
+
+
+
+/* --------------- SET UP BOTTOM CONTAINER INFORMATION  --------------- */
+
+#bot_banner {
+  height: 50px;
+  width: 100%;
+  background-color: #4CAF50; 
+  color: white;
+  text-align: left;
+  padding: 0px; 
+  line-height: 50px; 
+  font-size: 36px; 
+  font-weight: bold; 
+  font-family: 'Oswald', sans-serif; 
+}
+
+#bot_banner strong {
+  margin-left: 40px; 
+}
+
+#bot_container {
+  display: flex;
+  flex-wrap: nowrap; 
+  height: calc(100% - 100px); 
+  width: 100%;
+  max-height: 600px;
+   /* Allow scrolling */
+}
+
+#bot_leftbar {
+  width: 40%;
+  background-color: #eeeeee; 
+  padding: 10px;
+  overflow-y: auto; 
+  display: flex;
+  flex-direction: column;
+}
+
+#bot_leftbar h2 {
+  margin-left: 40px; 
+  margin-bottom: 10px; 
+}
+
+#bot_leftbar ul {
+  margin-top: 0px; 
+  margin-left: 60px; 
+  padding-left: 0; 
+}
+
+#bot_leftbar p {
+  margin-left: 40px; 
+}
+
+#bot_rightbar {
+  width: 60%;
+  background-color: #eeeeee; 
+  padding: 10px;
+  overflow-y: auto; 
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------- Add styles for the image carousel */
+.carousel {
+  width: 100%;
+  max-width: 600px;
+  max-height: 400px;
+  margin: 20px auto;
+}
+
+.carousel img {
+  width: 600px;
+  height: auto;
+  max-width: 600px; 
+  max-height: 400px; 
+  object-fit: cover;
+  object-position: center; 
+  display: block;
+  margin: 0 auto;
+}
+
+.carousel_caption {
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+}
+
+.carousel_caption .swipe_icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.carousel_caption p {
+  display: inline;
+  font-size: 16px;
+  color: #666;
+}
+
+/* --------------- SET UP FOOTER / SOURCES CONTAINER  --------------- */
+
+#bottomBar {
+  width: 100%;
+  background-color: #f1f1f1;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
+
+#bottomBar h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#bottomBar ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#bottomBar li {
+  margin-bottom: 10px;
+}
+
+#bottomBar a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+#bottomBar a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* --------------- MISC.  --------------- */
+
+/* Add record button to map */
+.addRecordBtn {
+  position: absolute;
+  z-index: 10;
+  bottom: 40px;
+  left: 40px;
+  background-color: #af4c4c;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 24px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.addRecordBtn:hover {
+  background-color: #813737;
+  transform: scale(1.1); /* Grow to 110% of the original size on hover */
+}
+
+
+
+
+
+
 
 
 
