@@ -372,14 +372,9 @@ p {
   transform: scale(1.1); /* Grow to 110% of the original size on hover */
 }
 
-
-
-
 /* Ensure the initial visibility of the custom legend and layer list */
 .custom-legend,
-.custom-layerlist,
-.esri-search,
-.esri-sketch {
+.custom-layerlist {
   display: block;
 }
 

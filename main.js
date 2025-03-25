@@ -1,5 +1,7 @@
 /* filepath: /c:/Users/torre/GISProgramming/cogongrass_occurrence/main.js */
 
+console.log('main.js script loaded');
+
 require([
     "esri/config",
     "esri/Map",
@@ -14,6 +16,7 @@ require([
     "esri/widgets/Sketch",
     "esri/layers/GraphicsLayer"
 ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Legend, Query, LayerList, SpatialReference, Sketch, GraphicsLayer) => {
+    console.log('ArcGIS modules loaded');
     esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurDKwg_xacEwEedlXdUDyJ7P-7Qbg6QwjB-VtI5cUmAZMi_mWKOS0Vo0J49DRO-0J1pP0__52Rw9RjcLIXbVib3NGIPqd05v5bJLJV72gKKaZ9YkXNs7vzI0H2rf2ZDaRG0YJIXAI9DX-3IngC9SL_rzfc3EVbzlgr9obb-jV-Uwz063O_Kvrm2St2D_Eay2k0CwVj5Jd4vRShs708LiyuLs.AT1_UdS3K7WT";
 
     const map = new Map({
@@ -43,28 +46,9 @@ require([
     });
     layerList.container.classList.add("custom-layerlist");
 
-    // Add map widgets
-    view.ui.add(layerList.container, "top-right");
-    view.ui.add(legend.container, "bottom-right");
-    view.ui.add(locateBtn, "top-left");
-
-    // Ensure the DOM is fully loaded before adding event listeners
-    document.addEventListener('DOMContentLoaded', () => {
-        const legendContainer = document.querySelector('.custom-legend');
-        const layerListContainer = document.querySelector('.custom-layerlist');
-        const toggleLegendButton = document.getElementById('toggleLegend');
-        const toggleLayerListButton = document.getElementById('toggleLayerList');
-
-        toggleLegendButton.addEventListener('click', () => {
-            legendContainer.classList.toggle('collapsed');
-            legendContainer.classList.toggle('expanded');
-        });
-
-        toggleLayerListButton.addEventListener('click', () => {
-            layerListContainer.classList.toggle('collapsed');
-            layerListContainer.classList.toggle('expanded');
-        });
-    });
+    // Append the legend and layer list containers to the sidebar
+    //document.querySelector('#sidebar').appendChild(legend.container);
+    //document.querySelector('#sidebar').appendChild(layerList.container);
 
     // Graphics layer for sketching
     const graphicsLayer = new GraphicsLayer({ title: "Region of Interest" });
@@ -86,6 +70,55 @@ require([
         sources: []
     });
     view.ui.add(searchWidget, "top-left");
+
+    // Add map widgets
+    view.ui.add(locateBtn, "top-left");
+
+    
+    // Add a button to toggle legend visibility
+    const toggleButton_legend = document.createElement("button");
+    toggleButton_legend.innerHTML = "Toggle Legend";
+    toggleButton_legend.style.position = "absolute";
+    toggleButton_legend.style.top = "10px";
+    toggleButton_legend.style.left = "10px";
+
+    document.body.appendChild(toggleButton_legend);
+
+    // Track legend visibility state
+    let isLegendVisible = true;
+
+    // Toggle legend visibility on button click
+    toggleButton_legend.addEventListener("click", () => {
+        if (isLegendVisible) {
+            legend.container.style.display = 'none'; // Hide legend
+        } else {
+            legend.container.style.display = 'block'; // Show legend
+        }
+        isLegendVisible = !isLegendVisible;
+    });
+
+
+        // Add a button to toggle layer list visibility
+        const toggleButton_layers = document.createElement("button");
+        toggleButton_layers.innerHTML = "Toggle Layer List";
+        toggleButton_layers.style.position = "absolute";
+        toggleButton_layers.style.top = "10px";
+        toggleButton_layers.style.right = "20px";
+    
+        document.body.appendChild(toggleButton_layers);
+    
+        // Track legend visibility state
+        let isLayerListVisible = true;
+    
+        // Toggle legend visibility on button click
+        toggleButton_layers.addEventListener("click", () => {
+            if (isLayerListVisible) {
+                layerList.container.style.display = 'none'; // Hide legend
+            } else {
+                layerList.container.style.display = 'block'; // Show legend
+            }
+            isLayerListVisible = !isLayerListVisible;
+        });
 
     // Load layers
     require(["./layers.js"], (layers) => {
