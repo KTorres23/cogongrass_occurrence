@@ -427,6 +427,7 @@ p {
   #bottomBar {
     flex-direction: column; 
     height:auto;
+    max-width: 600px;
   }
 
   #bot_banner {
@@ -452,27 +453,12 @@ p {
     height: auto; 
   }
 
-  /* center the record bar and make it smaller */
   .addRecordBtn {
     bottom: 50px;
     padding: 4px 8px;
     font-size: 16px;
     position: fixed;
   }
-
-  /* make the custom legend and layer list thinner */
-  .custom-legend {
-    width: 25px;
-    height: auto;
-    flex-direction: horizontal;
-  }
-
-  .custom-layerlist {
-    width: 25px; 
-    height: auto;
-    flex-direction: horizontal;
-  }
-
 
 }
 
