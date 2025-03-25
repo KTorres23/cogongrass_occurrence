@@ -46,10 +46,6 @@ require([
     });
     layerList.container.classList.add("custom-layerlist");
 
-    // Append the legend and layer list containers to the sidebar
-    //document.querySelector('#sidebar').appendChild(legend.container);
-    //document.querySelector('#sidebar').appendChild(layerList.container);
-
     // Graphics layer for sketching
     const graphicsLayer = new GraphicsLayer({ title: "Region of Interest" });
     map.add(graphicsLayer);
@@ -98,27 +94,27 @@ require([
     });
 
 
-        // Add a button to toggle layer list visibility
-        const toggleButton_layers = document.createElement("button");
-        toggleButton_layers.innerHTML = "Toggle Layer List";
-        toggleButton_layers.style.position = "absolute";
-        toggleButton_layers.style.top = "10px";
-        toggleButton_layers.style.right = "20px";
-    
-        document.body.appendChild(toggleButton_layers);
-    
-        // Track legend visibility state
-        let isLayerListVisible = true;
-    
-        // Toggle legend visibility on button click
-        toggleButton_layers.addEventListener("click", () => {
-            if (isLayerListVisible) {
-                layerList.container.style.display = 'none'; // Hide legend
-            } else {
-                layerList.container.style.display = 'block'; // Show legend
-            }
-            isLayerListVisible = !isLayerListVisible;
-        });
+    // Add a button to toggle layer list visibility
+    const toggleButton_layers = document.createElement("button");
+    toggleButton_layers.innerHTML = "Toggle Layer List";
+    toggleButton_layers.style.position = "absolute";
+    toggleButton_layers.style.top = "10px";
+    toggleButton_layers.style.right = "20px";
+
+    document.body.appendChild(toggleButton_layers);
+
+    // Track layer list visibility state
+    let isLayerListVisible = true;
+
+    // Toggle layer list visibility on button click
+    toggleButton_layers.addEventListener("click", () => {
+        if (isLayerListVisible) {
+            layerList.container.style.display = 'none'; // Hide legend
+        } else {
+            layerList.container.style.display = 'block'; // Show legend
+        }
+        isLayerListVisible = !isLayerListVisible;
+    });
 
     // Load layers
     require(["./layers.js"], (layers) => {
