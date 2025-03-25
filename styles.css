@@ -192,7 +192,7 @@ h2 {
   font-size: 22px; 
   font-weight: bold; 
   color: #333; 
-  line-height: 0.5;
+  line-height: 1;
   padding: 0px 0;
 }
 
@@ -201,50 +201,6 @@ p {
   font-size: 16px;
   line-height: 1.5; 
   color: #666; 
-}
-
-
-/* --------------- Media query for smaller screens  --------------- */
-@media (max-width: 600px) {
-  #banner {
-    height: auto;
-    flex-direction: column;
-  }
-
-  #subBanner {
-    height: auto; 
-    padding: 10px 0;
-    flex-direction: column; 
-  }
-
-  #subBanner ul {
-    padding-left: 0;
-  }
-
-  #subBanner li {
-    display: block;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-
-  #subBanner li:not(:last-child)::after {
-    content: "•"; 
-    margin-left: 10px;
-    margin-right: 10px;
-    color: black; 
-  }
-
-  #container {
-    flex-direction: column;
-    height: auto; 
-  }
-
-  #sidebar,
-  #viewDiv {
-    width: 100%;
-    height: 50vh;
-  }
-
 }
 
 
@@ -270,6 +226,7 @@ p {
 
 #bot_container {
   display: flex;
+  justify-content: space-between;
   flex-wrap: nowrap; 
   height: calc(100% - 100px); 
   width: 100%;
@@ -279,6 +236,7 @@ p {
 
 #bot_leftbar {
   width: 40%;
+  flex: 1;
   background-color: #eeeeee; 
   padding: 10px;
   overflow-y: auto; 
@@ -303,6 +261,7 @@ p {
 
 #bot_rightbar {
   width: 60%;
+  flex: 1;
   background-color: #eeeeee; 
   padding: 10px;
   overflow-y: auto; 
@@ -354,7 +313,8 @@ p {
   width: 100%;
   background-color: #f1f1f1;
   padding: 20px;
-  text-align: center;
+  padding-bottom: 75px;
+  text-align: left;
   border-top: 1px solid #ccc;
 }
 
@@ -373,6 +333,8 @@ p {
 
 #bottomBar li {
   margin-bottom: 10px;
+  font-size: 14px; 
+  text-align: left;
 }
 
 #bottomBar a {
@@ -383,6 +345,7 @@ p {
 #bottomBar a:hover {
   text-decoration: underline;
 }
+
 
 
 
@@ -412,7 +375,106 @@ p {
 
 
 
+/* Ensure the initial visibility of the custom legend and layer list */
+.custom-legend,
+.custom-layerlist,
+.esri-search,
+.esri-sketch {
+  display: block;
+}
 
+/* --------------- Media query for smaller screens  --------------- */
+@media (max-width: 600px) {
+  #banner {
+    height: auto;
+    flex-direction: column;
+  }
+
+  #subBanner {
+    height: auto; 
+    padding: 10px 0;
+    flex-direction: column; 
+  }
+
+  #subBanner ul {
+    padding-left: 0;
+  }
+
+  #subBanner li {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  #subBanner li:not(:last-child)::after {
+    content: "•"; 
+    margin-left: 10px;
+    margin-right: 10px;
+    color: black; 
+  }
+
+  #container {
+    flex-direction: column;
+    height: auto; 
+  }
+
+  #sidebar,
+  #viewDiv {
+    width: 100%;
+    height: 50vh;
+  }
+
+  #bottomBar {
+    flex-direction: column; 
+    height:auto;
+  }
+
+  #bot_banner {
+    height: auto;
+    flex-direction: column;
+  }
+
+  #bot_banner strong {
+    margin-left: 0; 
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+
+  #bot_container {
+    flex-direction: column;
+    height: auto; 
+  }
+
+  #bot_leftbar,
+  #bot_rightbar {
+    width: 100%;
+    height: auto; 
+  }
+
+  /* center the record bar and make it smaller */
+  .addRecordBtn {
+    bottom: 50px;
+    padding: 4px 8px;
+    font-size: 16px;
+    position: fixed;
+  }
+
+  /* make the custom legend and layer list thinner */
+  .custom-legend {
+    width: 25px;
+    height: auto;
+    flex-direction: horizontal;
+  }
+
+  .custom-layerlist {
+    width: 25px; 
+    height: auto;
+    flex-direction: horizontal;
+  }
+
+
+}
 
 
 

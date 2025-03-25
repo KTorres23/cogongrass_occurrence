@@ -48,6 +48,24 @@ require([
     view.ui.add(legend.container, "bottom-right");
     view.ui.add(locateBtn, "top-left");
 
+    // Ensure the DOM is fully loaded before adding event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        const legendContainer = document.querySelector('.custom-legend');
+        const layerListContainer = document.querySelector('.custom-layerlist');
+        const toggleLegendButton = document.getElementById('toggleLegend');
+        const toggleLayerListButton = document.getElementById('toggleLayerList');
+
+        toggleLegendButton.addEventListener('click', () => {
+            legendContainer.classList.toggle('collapsed');
+            legendContainer.classList.toggle('expanded');
+        });
+
+        toggleLayerListButton.addEventListener('click', () => {
+            layerListContainer.classList.toggle('collapsed');
+            layerListContainer.classList.toggle('expanded');
+        });
+    });
+
     // Graphics layer for sketching
     const graphicsLayer = new GraphicsLayer({ title: "Region of Interest" });
     map.add(graphicsLayer);
