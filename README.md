@@ -1,7 +1,5 @@
 # Invasive Cogongrass Occurrence Web App
 
-***Currently in development; last updated 3/24/2025***
-
 Web App link, hosted in Github Pages: [ktorres23.github.io/cogongrass_occurrence/](https://ktorres23.github.io/cogongrass_occurrence/)
 
 ### Abstract
@@ -44,3 +42,5 @@ https://doi.org/10.1093/biosci/biu039.
 
 
 This web app was created for a midterm project in UF/GIS4102C-GIS Programming-Spring 2025.
+Cogongrass iNaturalist and EDDMapS datasets retrieved 3/15/25.
+Last updated 3/25/2025.
